@@ -1,0 +1,36 @@
+---
+import { cva } from "class-variance-authority";
+const button = cva(["font-medium","bg-blue-500", "rounded-full",'transition-all',"hover:drop-shadow-xl",'hover:-translate-y-1'], {
+  variants: {
+    intent: {
+      primary: "",
+      secondary:'',
+      tertiary:''
+      
+    },
+    size: {
+      small: "",
+      medium: "",
+
+    },
+  },
+  compoundVariants: [
+    {
+      intent: "primary",
+      size: "small",
+      class: "", 
+    },
+  ],
+  defaultVariants: {
+    intent: "primary",
+    size: "small",
+  },
+});
+
+const { intent, size } = Astro.props;
+---
+
+<button class={button({ intent, size })}>
+  <slot />
+  
+</button>
