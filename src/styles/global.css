@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+    /* colors */
+    --color-brand-bistro: #2F1B10;
+    --color-brand-butterscotch: #D39953;
+    --color-neutral-white: #ffffff;
+    --color-neutral-black: #000000;
+    --color-neutral-silver: #CBC4C0;
+    --color-neutral-seasalt: #FAF9F8;
+  }
