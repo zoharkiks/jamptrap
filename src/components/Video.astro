@@ -1,0 +1,30 @@
+---
+const { videoSrc, borderDirection } = Astro.props;
+---
+
+<!-- TODO Compress Video -->
+
+<!-- Video -->
+<div
+  class=`h-full w-full relative blur-sm hover:blur-0 transtion-[filter]  ${borderDirection} `
+>
+  <!-- Video element -->
+  <video
+    class=`h-full w-full object-cover grayscale ${borderDirection} `
+    src={videoSrc}
+    autoplay
+    muted
+    loop
+  >
+  </video>
+  <!-- Dark overlay -->
+  <div
+    class=`absolute top-0 left-0 right-0 bottom-0 ${borderDirection}  z-30  bg-black opacity-20 hover:opacity-0 transition-opacity `
+  >
+  </div>
+  <!-- Grain overlay -->
+  <div
+    class=` absolute top-0 left-0 opacity-[.06] right-0 bottom-0 bg-[url('/noise.gif')] ${borderDirection} `
+  >
+  </div>
+</div>

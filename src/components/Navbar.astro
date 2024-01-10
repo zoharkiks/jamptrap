@@ -1,28 +1,16 @@
 ---
-import Button from "./Button.astro";
-import Card from "./Card.astro";
-
+import logo from "../assets/jamptrap_logo.png";
+import { Image } from "astro:assets";
 ---
 
-
-
-
 <header>
-    <nav class="bg-green-500 flex justify-between items-center">   
-        <div class="">
-            Logo
-        </div>
-    
-        <ul class="flex">
-            <li>Link</li>
-            <li>Link</li>
-            <li>Link</li>
-            <li>Link </li>
-            <li>Link</li>
-        </ul>
-    
-        <Button>CTA</Button>
-    </nav>
-
+  <nav
+    class="flex justify-between items-center absolute w-full left-0 px-4 md:px-12 pt-4 z-[1000]"
+  >
+    <Image class="w-32" src={logo} alt="logo" />
+    <iconify-icon
+      icon="clarity:menu-line"
+      width="34"
+      class="text-text-primary mt-4 cursor-pointer "></iconify-icon>
+  </nav>
 </header>
-

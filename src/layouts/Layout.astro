@@ -26,8 +26,12 @@ const { title } = Astro.props;
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
   </head>
-  <body class="font-oswald">
-    <Loader />
+  <body class="font-oswald text-text-primary">
     <slot />
   </body>
+  <script
+    src="https://code.iconify.design/iconify-icon/1.0.8/iconify-icon.min.js"
+  ></script>
+<script src="../js/index.js"></script>
+
 </html>
