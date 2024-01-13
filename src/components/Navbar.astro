@@ -4,13 +4,62 @@ import { Image } from "astro:assets";
 ---
 
 <header>
+  
   <nav
-    class="flex justify-between items-center absolute w-full left-0 px-4 md:px-12 pt-4 z-[1000]"
+    class="flex justify-between items-center absolute w-full left-0 px-4 md:px-8 pt-4 z-[100] "
   >
-    <Image class="w-32" src={logo} alt="logo" />
+  
+    <Image class="w-32 cursor-pointer"  src={logo} alt="logo" />
     <iconify-icon
+      id="menu-button"
       icon="clarity:menu-line"
       width="34"
-      class="text-text-primary mt-4 cursor-pointer "></iconify-icon>
+      class="text-text-primary mt-4 cursor-pointer hover:text-accent-primary transition-colors"
+    ></iconify-icon>
+
+    <!-- Full-Screen Overlay, initially hidden with `hidden` class -->
+    <div
+      id="menu-overlay"
+      class="fixed inset-0 bg-black hidden z-50 grid grid-rows-6 px-10 md:px-0 md:gap-x-10 md:grid-cols-4"
+    >
+      <div
+        class="bg-gray-700 hidden md:inline-grid col-span-2 row-span-6 showReel"
+      >
+      </div>
+
+      <div
+        class="row-start-3 md:row-start-2 flex flex-col text-5xl md:text-6xl space-y-4 md:col-start-3"
+      >
+        <a class="w-max hover:text-accent-primary transition-colors transition-link" href="/"
+          >Home
+          <div class="bg-text-primary h-0.5 w-0 mt-1"></div>
+        </a>
+
+        <a class="w-max hover:text-accent-primary transition-colors transition-link" href="/about-us"
+          >About Us
+          <div class="bg-text-primary h-0.5 w-0 mt-1"></div>
+        </a>
+
+        <a class="w-max hover:text-accent-primary transition-colors transition-link" href="/"
+          >Events/Calendar
+          <div class="bg-text-primary h-0.5 w-0 mt-1"></div>
+        </a>
+
+        <a class="w-max hover:text-accent-primary transition-colors transition-link" href="/"
+          >Gallery
+          <div class="bg-text-primary h-0.5 w-0 mt-1"></div>
+        </a>
+
+        <a class="w-max hover:text-accent-primary transition-colors transition-link" href="/"
+          >Contact
+          <div class="bg-text-primary h-0.5 w-0 mt-1"></div>
+        </a>
+      </div>
+      <iconify-icon
+        id="close-menu-button"
+        width="40"
+        class="absolute top-8 right-6 cursor-pointer"
+        icon="clarity:window-close-line"></iconify-icon>
+    </div>
   </nav>
 </header>

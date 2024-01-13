@@ -7,7 +7,7 @@ import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout title="JamTrap">
-  <main class="bg-surface-primary min-h-dvh md:p-4 lg:p-8 relative">
+  <main data-barba="container" data-barba-namespace="home" class=" min-h-dvh md:p-4 lg:p-4 relative  ">
     <Navbar />
     <div
       class="grid md:rounded-3xl h-screen w-full place-items-center grid-rows-3 md:grid-cols-3 md:grid-rows-1 relative"
@@ -15,17 +15,19 @@ import Layout from "../layouts/Layout.astro";
       <div
         class="absolute h-full w-full grid grid-rows-3 md:grid-cols-3 md:grid-rows-1"
       >
-      
-       <Video videoSrc="/video-guitar.mp4" borderDirection="md:rounded-l-3xl"/>
-       <Video videoSrc="/video-keyboard.mp4"/>
-       <Video videoSrc="/video-drums.mp4 " borderDirection="md:rounded-r-3xl"/>
-
-       
-
+        <Video
+          videoSrc="/video-guitar.mp4"
+          borderDirection="md:rounded-l-3xl"
+        />
+        <Video videoSrc="/video-keyboard.mp4" />
+        <Video
+          videoSrc="/video-drums.mp4 "
+          borderDirection="md:rounded-r-3xl"
+        />
       </div>
 
       <div
-        class="row-span-3 flex flex-col justify-center items-center text-5xl text-center z-10 md:col-start-1 font-semibold space-y-8 md:text-[50px]  col-span-3 "
+        class="row-span-3 flex flex-col justify-center items-center text-5xl text-center z-10 md:col-start-1 font-semibold space-y-8 md:text-[50px] col-span-3"
       >
         <h1>Stay Tuned</h1>
         <h2 class="leading-tight">
@@ -33,5 +35,9 @@ import Layout from "../layouts/Layout.astro";
         </h2>
       </div>
     </div>
+    
   </main>
+
+<script src="../js/index.js"></script>
+  
 </Layout>

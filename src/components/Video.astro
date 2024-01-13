@@ -2,19 +2,19 @@
 const { videoSrc, borderDirection } = Astro.props;
 ---
 
-<!-- TODO Compress Video -->
+<!-- TODO Optimize Videos -->
 
 <!-- Video -->
 <div
-  class=`h-full w-full relative blur-sm hover:blur-0 transtion-[filter]  ${borderDirection} `
+  class=`h-full w-full relative blur-sm hover:blur-0 transtion-[filter]  video-container  ${borderDirection} `
 >
   <!-- Video element -->
   <video
-    class=`h-full w-full object-cover grayscale ${borderDirection} `
+    class=`h-full w-full object-cover grayscale  ${borderDirection} `
     src={videoSrc}
-    autoplay
     muted
     loop
+    
   >
   </video>
   <!-- Dark overlay -->
