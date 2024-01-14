@@ -9,6 +9,10 @@ export default {
         "text-brand": "var(--color-brand-butterscotch)",
         "text-primary": "var(--color-neutral-white)",
       },
+
+      backgroundImage: {
+        'aboutUs': "url('/src/assets/aboutUs.jpg')",
+      },
     },
 	fontFamily: {
 		'oswald': ['Oswald', 'sans-serif'],

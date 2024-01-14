@@ -8,7 +8,7 @@ gsap.registerPlugin(CustomEase);
 const links = gsap.utils.toArray(".row-start-3 a");
 
 // Initial setup on page load
-initScripts();
+initPageTransitions();
 
 function initSmoothScroll() {
   const lenis = new Lenis();
@@ -26,12 +26,6 @@ function toggleMenu() {
   const tl = gsap.timeline();
 
   tl.paused(true);
-
-  tl.fromTo(
-    "#menu-button",
-    { opacity: 1 },
-    { opacity: 0, duration: 0.25, ease: "power1.inOut" }
-  );
 
   tl.fromTo(
     overlay,
@@ -67,7 +61,7 @@ function toggleMenu() {
   tl.fromTo(
     ".showReel",
     { opacity: 0 },
-    { opacity: 1, duration: 0.25, ease: "power1.inOut" }
+    { opacity: 1, duration: 0.25, delay:.5, ease: "power1.inOut" },"<"
   );
 
   // Animate Menu In
@@ -101,63 +95,19 @@ function toggleMenu() {
     .addEventListener("click", function () {
       animateMenuOut();
     });
-
-  // function linkClickHandler(e) {
-  //   let href = e.currentTarget.getAttribute("href");
-  //   barba.go(href);
-  // }
-
-  // document.querySelectorAll(".transition-link").forEach((link) => {
-  //   link.addEventListener("click", linkClickHandler);
-  // });
-
-  barba.init({
-    transitions: [
-      {
-        name: "opacity-transition",
-        async leave(data) {
-          gsap.fromTo(
-            data.current.container,
-            { opacity: 1 },
-            {
-              opacity: 0,
-              duration: 1,
-              ease: "power1.inOut",
-            }
-          );
-        },
-        enter(data) {
-
-          gsap.fromTo(
-            data.next.container,
-            { opacity: 0 },
-            {
-              opacity: 1,
-              duration: 1,
-              ease: "power1.inOut",
-
-              onComplete: () => {
-              animateMenuOut(), initScripts();
-              },
-            }
-          );
-        },
-      },
-    ],
-  });
 }
 
+// BUG:Animate Underline Not Working on page transition
 function animateUnderline() {
   links.forEach((link) => {
     const underline = link.querySelector("div"); // Get the underline div for this link
-
     link.addEventListener("mouseenter", () => {
       gsap.set(link, {
         direction: "ltr", // Start scaling from the right
       });
       gsap.to(underline, {
         width: "100%", // Scale the underline a bit larger than full width
-        duration: 0.3, // Duration of the animation
+        duration: 0.3,
         ease: CustomEase.create("custom", "1, 0, 0.24, 1"),
         // Easing function
       });
@@ -174,6 +124,73 @@ function animateUnderline() {
         ease: CustomEase.create("custom", "1, 0, 0.24, 1"),
       });
     });
+  });
+}
+
+function pageTransitionIn(data) {
+  const tl = gsap.timeline();
+  tl.fromTo(
+    "#menu-overlay",
+    { y: 0 },
+    { y: -932, duration: 1, delay: 0.25, ease: "power1.inOut" }
+  );
+
+  tl.fromTo(
+    data,
+    {
+      opacity: 1,
+    },
+    {
+      opacity: 0,
+
+      duration: 0.5,
+      ease: "power1.inOut",
+    }
+  );
+
+  return tl;
+}
+
+function pageTransitionOut(data) {
+  const tl = gsap.timeline();
+
+  tl.fromTo(
+    data,
+    {
+      opacity: 0,
+    },
+    {
+      duration: 0.5,
+      opacity: 1,
+      ease: "power1.inOut",
+      onComplete: () => {
+        document.body.classList.remove("fixed", "inset-0");
+        initScripts();
+      },
+    }
+  );
+
+  return tl;
+}
+
+function initPageTransitions() {
+  barba.init({
+    transitions: [
+      {
+        name: "opacity-transition",
+        once(data) {
+          initScripts();
+        },
+        async leave(data) {
+          await pageTransitionIn(data.current.container);
+          data.current.container.remove();
+        },
+        async enter(data) {
+          initScripts();
+          pageTransitionOut(data.next.container);
+        },
+      },
+    ],
   });
 }
 
@@ -195,6 +212,6 @@ function playVideos() {
 function initScripts() {
   initSmoothScroll();
   toggleMenu();
-  animateUnderline();
   playVideos();
+  animateUnderline();
 }

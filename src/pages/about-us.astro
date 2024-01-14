@@ -1,17 +1,51 @@
 ---
+import { getImage } from "astro:assets";
 import Navbar from "../components/Navbar.astro";
 import Layout from "../layouts/Layout.astro";
+import aboutUs from "../assets/aboutUs.jpg";
 
-
+const optimizedBackground = await getImage({ src: aboutUs, format: "webp" });
 ---
+
 <Layout title="About Us">
-    <main class="min-h-dvh md:p-4 lg:p-4 relative " data-barba="container" data-barba-namespace="about-us">
-<Navbar/>
-<div class="grid bg-red-500 md:rounded-3xl h-screen w-full place-items-center grid-rows-3 md:grid-cols-3 md:grid-rows-1 relative">
+  <main
+    class="min-h-dvh md:p-4 lg:p-4 relative"
+    data-barba="container"
+    data-barba-namespace="about-us"
+  >
+    <Navbar />
 
-    <button id="test">test</button>
-</div>
-    </main>
+    <div
+      class="grid grid-cols-1 md:rounded-3xl h-screen w-full grid-rows-3 md:grid-cols-5 md:grid-rows-1 relative"
+    >
+      <div
+        class="col-span-3 row-span-3 w-full bg-cover bg-center md:rounded-l-3xl grid grid-rows-4 p-4"
+        style={{ backgroundImage: `url(${optimizedBackground.src})` }}
+      >
+        <!-- Black Overlay -->
+        <div
+          class="absolute top-0 left-0 right-0 bottom-0 bg-black opacity-60 z-10"
+        >
+        </div>
+        <!-- Grain overlay -->
+        <div
+          class=` absolute top-0 left-0 opacity-[.06] right-0 bottom-0 bg-[url('/noise.gif')]  `
+        >
+        </div>
 
-
+        <div class="relative z-20 row-start-2 text-3xl  ">
+          Welcome to  <span class="text-text-brand font-bold inline-block mb-4">JamTrap</span><br/> Palampur's ultimate destination for musical
+          exploration! We're not just a spot; we're a haven where melodies come
+          to life. At JamTrap, immerse yourself in the rhythm, savor the coffee,
+          and join a community that resonates with the joy of live music. Get
+          ready to experience the magic – this is JamTrap, where music meets
+          moments.
+        </div>
+      </div>
+      <div
+        class="bg-green-500 hidden md:col-span-2 md:rounded-r-3xl w-full md:flex shadow-2xl"
+      >
+      </div>
+    </div>
+  </main>
 </Layout>
